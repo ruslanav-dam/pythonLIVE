@@ -457,303 +457,182 @@ print(calcular(10, "-", 3))
 print(calcular(10, "*", 2))
 print(calcular(10, "/", 3))
 print(calcular(10, "/", 0))
-print(calcular(10, "^", 2))`,testCases:[{id:"t1",description:"Suma: 10 + 5 = 15",validationCode:'assert calcular(10, "+", 5) == 15',isHidden:!1},{id:"t2",description:"Resta: 10 - 3 = 7",validationCode:'assert calcular(10, "-", 3) == 7',isHidden:!1},{id:"t3",description:"Multiplicacio: 10 * 2 = 20",validationCode:'assert calcular(10, "*", 2) == 20',isHidden:!1},{id:"t4",description:"Divisio: 10 / 4 = 2.5",validationCode:'assert calcular(10, "/", 4) == 2.5',isHidden:!1},{id:"t5",description:"Divisio per zero",validationCode:'assert calcular(10, "/", 0) == "Error: divisio per zero"',isHidden:!1},{id:"t6",description:"Operador no valid",validationCode:'assert calcular(10, "^", 2) == "Error: operador no valid"',isHidden:!1}],hints:[{text:"Pots usar if/elif/else o match-case (Python 3.10+). Recorda comprovar la divisio per zero abans de dividir.",cost:5},{text:`Primer comprova l'operador. Si es "/", comprova si b == 0 abans de dividir. El cas default es "Error: operador no valid".`,cost:10}],tags:["condicionals","match-case","switch","python-vs-java"]}],sj=[{id:"theory-var-01",topicId:"variables",order:1,title:"Variables i tipus a Python",content:`## Variables i tipus a Python
+print(calcular(10, "^", 2))`,testCases:[{id:"t1",description:"Suma: 10 + 5 = 15",validationCode:'assert calcular(10, "+", 5) == 15',isHidden:!1},{id:"t2",description:"Resta: 10 - 3 = 7",validationCode:'assert calcular(10, "-", 3) == 7',isHidden:!1},{id:"t3",description:"Multiplicacio: 10 * 2 = 20",validationCode:'assert calcular(10, "*", 2) == 20',isHidden:!1},{id:"t4",description:"Divisio: 10 / 4 = 2.5",validationCode:'assert calcular(10, "/", 4) == 2.5',isHidden:!1},{id:"t5",description:"Divisio per zero",validationCode:'assert calcular(10, "/", 0) == "Error: divisio per zero"',isHidden:!1},{id:"t6",description:"Operador no valid",validationCode:'assert calcular(10, "^", 2) == "Error: operador no valid"',isHidden:!1}],hints:[{text:"Pots usar if/elif/else o match-case (Python 3.10+). Recorda comprovar la divisio per zero abans de dividir.",cost:5},{text:`Primer comprova l'operador. Si es "/", comprova si b == 0 abans de dividir. El cas default es "Error: operador no valid".`,cost:10}],tags:["condicionals","match-case","switch","python-vs-java"]}],sj=[{id:"theory-var-01",topicId:"variables",order:1,title:"Variables i tipus a Python",content:`## Variables a Python
 
-A **Java**, cada variable ha de tenir un tipus declarat:
-
-\`\`\`java
-int edat = 25;
-String nom = "Anna";
-double preu = 19.99;
-boolean actiu = true;
-\`\`\`
-
-A **Python**, les variables **no necessiten declaracio de tipus**. Python infereix el tipus automaticament:
+No cal declarar el tipus. Sense \`;\`. Els booleans van amb majuscula:
 
 \`\`\`python
-edat = 25          # int
-nom = "Anna"       # str
-preu = 19.99       # float
-actiu = True       # bool (amb majuscula!)
+edat = 25           # int
+nom = "Anna"        # str
+preu = 19.99        # float
+actiu = True        # bool (True/False, no true/false)
 \`\`\`
 
-### Diferencies clau amb Java
-
-| Concepte | Java | Python |
-|---|---|---|
-| Declaracio | \`int x = 5;\` | \`x = 5\` |
-| Punt i coma | Obligatori \`;\` | No cal |
-| Tipus | Estatic (fix) | Dinamic (pot canviar) |
-| Booleans | \`true / false\` | \`True / False\` |
-| Nul | \`null\` | \`None\` |
-
-### Tipat dinamic
-
-A Python, una variable pot canviar de tipus en qualsevol moment:
+Les variables poden **canviar de tipus** en qualsevol moment:
 
 \`\`\`python
-x = 10        # x es int
-x = "hola"    # ara x es str (sense error!)
-x = [1, 2, 3] # ara x es una llista
+x = 10          # int
+x = "hola"      # ara es str, sense error!
 \`\`\`
-
-Aixo es **impossible** a Java!
 
 ### Assignacio multiple
 
-Python permet assignar multiples variables en una sola linia:
-
 \`\`\`python
-# Assignacio en paral·lel
-nom, edat, nota = "Anna", 20, 8.5
-
-# Mateix valor a varies variables
-x = y = z = 0
-
-# Intercanvi sense variable temporal!
-a, b = b, a
-\`\`\``,javaComparison:`// Java requereix declarar cada variable per separat:
+nom, edat, nota = "Anna", 20, 8.5   # 3 variables en 1 linia
+x = y = z = 0                        # mateix valor
+a, b = b, a                          # intercanvi directe!
+\`\`\``,javaComparison:`// Java: cal tipus, cal ;
 int edat = 25;
 String nom = "Anna";
-double preu = 19.99;
-boolean actiu = true;
 
-// No pots canviar el tipus:
-// edat = "vint-i-cinc"; // ERROR de compilacio!
+// Intercanvi: necessites temp
+int temp = a; a = b; b = temp;`},{id:"theory-var-syntax",topicId:"variables",order:2,title:"print() i sintaxi basica",content:`## print() i sintaxi basica
 
-// Per intercanviar necessites temp:
-int temp = a;
-a = b;
-b = temp;`},{id:"theory-var-syntax",topicId:"variables",order:2,title:"print(), indentacio i sintaxi basica",content:`## print(), indentacio i sintaxi basica
-
-### La funcio print()
-
-A **Java**, uses \`System.out.println()\`. A **Python**, simplement \`print()\`:
+\`System.out.println()\` -> \`print()\`:
 
 \`\`\`python
-print("Hola, mon!")           # Imprimeix text
-print(42)                      # Imprimeix un numero
-print("Edat:", 25)             # Diversos valors separats per espai
-print(type(3.14))              # Imprimeix el tipus: <class 'float'>
+print("Hola!")              # text
+print(42)                   # numero
+print("Edat:", 25)          # varies coses, separades per espai
+print(type(3.14))           # <class 'float'>
 \`\`\`
 
-Pots imprimir varies coses amb comes, i Python les separa amb espais automaticament:
-\`\`\`python
-nom = "Anna"
-edat = 20
-print("Hola", nom, "tens", edat, "anys")
-# Sortida: Hola Anna tens 20 anys
-\`\`\`
+### Indentacio = blocs de codi
 
-### La indentacio: ESSENCIAL a Python
-
-A **Java**, els blocs de codi es delimiten amb claus \`{}\`:
-\`\`\`java
-if (x > 0) {
-    System.out.println("positiu");  // la indentacio es opcional
-}
-\`\`\`
-
-A **Python**, **la indentacio ES el bloc de codi**. No hi ha claus, i la indentacio es **obligatoria**:
-\`\`\`python
-if x > 0:
-    print("positiu")   # OBLIGATORI: 4 espais d'indentacio
-    print("i valid")    # mateix nivell = mateix bloc
-print("fora del if")    # sense indentacio = fora del bloc
-\`\`\`
-
-Si la indentacio es incorrecta, Python dona error:
-\`\`\`python
-if x > 0:
-print("error!")  # IndentationError: expected an indented block
-\`\`\`
-
-### Condicional basic: if / else
-
-Ja coneixes \`if\` de Java. A Python es quasi igual, pero **sense parentesis** i amb **dos punts** \`:\`:
+A Python **no hi ha claus** \`{}\`. Els blocs es defineixen amb **indentacio** (4 espais):
 
 \`\`\`python
-# Java:                     # Python:
-# if (x > 0) {              if x > 0:
-#     ...                       print("positiu")
-# } else if (x == 0) {      elif x == 0:
-#     ...                       print("zero")
-# } else {                  else:
-#     ...                       print("negatiu")
-# }
+if x > 0:                   # dos punts
+    print("positiu")        # 4 espais = dins del if
+    print("segur")          # encara dins
+print("fora del if")        # sense espais = fora
 \`\`\`
 
-Les diferencies clau:
-- **No parentesis** al voltant de la condicio
-- **Dos punts** \`:\` despres de cada condicio
-- **elif** en lloc de \`else if\`
-- **Indentacio** en lloc de \`{}\``,javaComparison:`// Java: print amb System.out
-System.out.println("Hola, mon!");
-System.out.println(42);
-System.out.printf("Edat: %d%n", 25);
+**Atencio:** si la indentacio es incorrecta, dona \`IndentationError\`.
 
-// Java: blocs amb claus
-if (x > 0) {
-    System.out.println("positiu");
-} else if (x == 0) {
-    System.out.println("zero");
+### if / elif / else
+
+Sense parentesis, sense claus, amb \`:\` i \`elif\`:
+
+\`\`\`python
+if nota >= 9:
+    print("Excel·lent")
+elif nota >= 5:
+    print("Aprovat")
+else:
+    print("Suspes")
+\`\`\``,javaComparison:`System.out.println("Hola!");
+
+if (nota >= 9) {
+    System.out.println("Excel·lent");
+} else if (nota >= 5) {
+    System.out.println("Aprovat");
 } else {
-    System.out.println("negatiu");
-}`},{id:"theory-var-02",topicId:"variables",order:7,title:"Conversio de tipus i None",content:`## Conversio de tipus (casting)
+    System.out.println("Suspes");
+}`},{id:"theory-var-02",topicId:"variables",order:7,title:"Conversio de tipus i None",content:`## Conversio de tipus
 
-A **Java**, el casting es automatic en alguns casos:
-
-\`\`\`java
-int x = 5;
-double y = x;  // Automatic: int -> double
-\`\`\`
-
-A **Python**, has de ser explicit quan vols convertir:
+\`input()\` **sempre retorna string**. Per convertir:
 
 \`\`\`python
-# input() SEMPRE retorna string
-edat_str = input("La teva edat: ")  # "25" (string!)
-edat = int(edat_str)                 # 25 (int)
-
-# Funcions de conversio
-int("42")      # 42
-float("3.14")  # 3.14
-str(42)        # "42"
-bool(0)        # False
-bool(1)        # True
+int("42")       # 42
+float("3.14")   # 3.14
+str(42)         # "42"
 \`\`\`
 
-### f-strings (format de text)
+### f-strings
 
-Python te les **f-strings**, molt mes netes que la concatenacio de Java:
+La manera mes neta de formatar text:
 
 \`\`\`python
 nom = "Anna"
 edat = 20
-# Amb f-string (Python 3.6+)
 print(f"Hola {nom}, tens {edat} anys")
 
-# Format amb decimals
 preu = 19.99
-print(f"Preu: {preu:.2f} euros")  # "Preu: 19.99 euros"
+print(f"Preu: {preu:.2f} euros")   # 2 decimals
 \`\`\`
 
-### None: el null de Python
+### None
 
-- A **Java**: \`null\`
-- A **Python**: \`None\` (amb N majuscula)
-
-**Important**: per comprovar None, utilitza \`is\`, no \`==\`:
+El \`null\` de Python es \`None\` (amb N majuscula). Comprova amb \`is\`:
 
 \`\`\`python
 x = None
-if x is None:       # Correcte
+if x is None:        # correcte (no usar ==)
     print("buit")
-if x is not None:    # Correcte
-    print("te valor")
-\`\`\``,javaComparison:`// Java: Scanner per llegir input
-Scanner sc = new Scanner(System.in);
-int edat = sc.nextInt();  // Ja retorna int
+\`\`\``,javaComparison:`// Java
+int edat = Integer.parseInt("42");
+String.format("Hola %s, tens %d anys", nom, edat);
 
-// Format amb printf
-String nom = "Anna";
-int edat = 20;
-System.out.printf("Hola %s, tens %d anys%n", nom, edat);
+Integer x = null;
+if (x == null) { ... }`}],aj=[{id:"theory-op-01",topicId:"operators",order:0,title:"Operadors aritmetics i logics",content:`## Operadors aritmetics
 
-// null en Java
-Integer resultat = null;
-if (resultat == null) {
-    System.out.println("buit");
-}`}],aj=[{id:"theory-op-01",topicId:"operators",order:0,title:"Operadors aritmetics i logics",content:'## Operadors a Python\n\n### Operadors aritmetics\n\nPython te uns quants operadors addicionals respecte Java:\n\n| Operador | Python | Java | Exemple |\n|---|---|---|---|\n| Divisio real | `/` | `(double) a / b` | `7 / 2` → `3.5` |\n| Divisio entera | `//` | `a / b` (entre ints) | `7 // 2` → `3` |\n| Modul | `%` | `%` | `7 % 2` → `1` |\n| Potencia | `**` | `Math.pow()` | `2 ** 3` → `8` |\n\n**Atencio!** A Java, `7 / 2` dona `3` (divisio entera entre enters). A Python, `7 / 2` dona `3.5` (sempre divisio real).\n\n### Operadors logics\n\n| Concepte | Java | Python |\n|---|---|---|\n| I logic | `&&` | `and` |\n| O logic | `\\|\\|` | `or` |\n| Negacio | `!` | `not` |\n\n```python\n# Java:  if (edat >= 18 && te_carnet)\n# Python:\nif edat >= 18 and te_carnet:\n    print("Pot conduir")\n```\n\n### Operadors amb strings\n\nPython permet operacions molt intuitives amb strings:\n\n```python\n# Concatenacio\n"Hola" + " " + "mon"       # "Hola mon"\n\n# Repeticio (no existeix a Java!)\n"Ja" * 3                    # "JaJaJa"\n"-" * 40                    # "----------------------------------------"\n\n# Pertinenca (en Java seria .contains())\n"Python" in "M\'agrada Python"  # True\n```',javaComparison:`// Operadors aritmetics a Java
-int a = 7, b = 2;
-System.out.println(a / b);          // 3 (divisio entera)
-System.out.println((double)a / b);  // 3.5
-System.out.println(a % b);          // 1
-System.out.println(Math.pow(2, 3)); // 8.0
+\`\`\`python
+7 / 2       # 3.5  (divisio real, SEMPRE float)
+7 // 2      # 3    (divisio entera)
+7 % 2       # 1    (modul)
+2 ** 3      # 8    (potencia, en Java: Math.pow())
+\`\`\`
 
-// Operadors logics a Java
-if (edat >= 18 && teCarnet) { ... }
-if (edat >= 65 || teMultes) { ... }
-if (!teMultes) { ... }
+**Compte:** a Java \`7/2\` dona \`3\`. A Python \`7/2\` dona \`3.5\`.
 
-// Strings a Java
-String linia = "-".repeat(40); // Nomes Java 11+
-boolean conte = frase.contains("Python");`},{id:"theory-op-02",topicId:"operators",order:3.5,title:"Identitat vs igualtat",content:`## \`is\` vs \`==\`: identitat vs igualtat
+## Operadors logics
 
-Aquesta es una diferencia **molt important** entre Python i Java, pero funciona al reves!
+Paraules en lloc de simbols:
 
-| | Java | Python |
-|---|---|---|
-| Compara **valor** | \`.equals()\` | \`==\` |
-| Compara **referencia** | \`==\` | \`is\` |
+\`\`\`python
+# Java: &&        Python: and
+# Java: ||        Python: or
+# Java: !         Python: not
+
+if edat >= 18 and te_carnet:
+    print("Pot conduir")
+\`\`\`
+
+## Operadors amb strings
+
+\`\`\`python
+"Hola" + " mon"                 # concatenacio
+"Ja" * 3                        # "JaJaJa" (repeticio)
+"-" * 40                        # 40 guions
+"Python" in "M'agrada Python"   # True (pertinenca)
+\`\`\``,javaComparison:`Math.pow(2, 3);     // 8.0 (potencia)
+"-".repeat(40);     // repeticio (Java 11+)
+frase.contains("X") // pertinenca`},{id:"theory-op-02",topicId:"operators",order:3.5,title:"is vs == (identitat vs igualtat)",content:`## is vs ==
+
+A Java \`==\` compara referencia. A Python es **al reves**:
+
+- \`==\` compara **valor** (com \`.equals()\` de Java)
+- \`is\` compara **referencia** (com \`==\` de Java)
 
 \`\`\`python
 a = [1, 2, 3]
 b = [1, 2, 3]
-c = a           # c apunta al MATEIX objecte que a
+c = a              # c apunta al MATEIX objecte
 
-# == compara VALOR
-print(a == b)   # True (mateix contingut)
-print(a == c)   # True
-
-# is compara IDENTITAT (mateixa referencia en memoria)
-print(a is b)   # False (objectes diferents)
-print(a is c)   # True (mateix objecte!)
+a == b   # True    (mateix contingut)
+a is b   # False   (objectes diferents)
+a is c   # True    (mateix objecte!)
 \`\`\`
 
-### Referencies i mutabilitat
+### Compte amb les referencies
 
-Quan fas \`c = a\`, **no copies** la llista. Fas que \`c\` apunti al **mateix objecte**:
+\`c = a\` **no copia**, fa que c apunti al mateix objecte:
 
 \`\`\`python
 a = [1, 2, 3]
 c = a
 a.append(4)
-print(c)    # [1, 2, 3, 4] - c tambe ha canviat!
-\`\`\`
+print(c)        # [1, 2, 3, 4]  c tambe canvia!
 
-Per copiar de veritat:
-\`\`\`python
-c = a.copy()     # Copia superficial
-c = a[:]         # Tambe copia
-c = list(a)      # Una altra forma
-\`\`\``,javaComparison:`// A Java es al reves!
-ArrayList<Integer> a = new ArrayList<>(List.of(1, 2, 3));
-ArrayList<Integer> b = new ArrayList<>(List.of(1, 2, 3));
-ArrayList<Integer> c = a;
+# Per copiar de veritat:
+c = a.copy()
+\`\`\``,javaComparison:`// Java: al reves!
+a == b        // compara referencia
+a.equals(b)   // compara valor
+// Copiar: new ArrayList<>(a)`}],lj=[{id:"theory-cond-01",topicId:"conditionals",order:0,title:"Condicionals a Python",content:`## if / elif / else
 
-// == compara REFERENCIA a Java (objectes)
-System.out.println(a == b);       // false (ref diferent)
-System.out.println(a == c);       // true (mateixa ref)
-
-// .equals() compara VALOR
-System.out.println(a.equals(b));  // true (mateix contingut)
-
-// Copiar a Java
-ArrayList<Integer> copia = new ArrayList<>(a);`}],lj=[{id:"theory-cond-01",topicId:"conditionals",order:0,title:"Condicionals a Python",content:`## Condicionals: Python vs Java
-
-### Sintaxi basica
-
-A Java utilitzem claus \`{}\` i parentesis \`()\`. A Python utilitzem **dos punts** \`:\` i **indentacio**:
-
-**Java:**
-\`\`\`java
-if (nota >= 5) {
-    System.out.println("Aprovat");
-} else {
-    System.out.println("Suspès");
-}
-\`\`\`
-
-**Python:**
-\`\`\`python
-if nota >= 5:
-    print("Aprovat")
-else:
-    print("Suspès")
-\`\`\`
-
-### \`elif\` en lloc de \`else if\`
+Sense parentesis, sense claus. Dos punts \`:\` i indentacio:
 
 \`\`\`python
 if nota >= 9:
@@ -763,44 +642,28 @@ elif nota >= 7:
 elif nota >= 5:
     print("Aprovat")
 else:
-    print("Suspès")
+    print("Suspes")
 \`\`\`
 
-### Regles importants
-
-1. **No calen parentesis** al voltant de la condicio (pero pots posar-los)
-2. **No calen claus** \`{}\` - la indentacio defineix el bloc
-3. \`elif\` en lloc de \`else if\`
-4. **Dos punts** \`:\` al final de cada linia \`if/elif/else\`
-5. **Indentacio de 4 espais** (obligatori, no es opcional com a Java)
+Recorda: \`elif\`, no \`else if\`.
 
 ### Operador ternari
 
-**Java:** \`condicio ? valor_si : valor_no\`
-\`\`\`java
-String estat = (edat >= 18) ? "major" : "menor";
-\`\`\`
-
-**Python:** \`valor_si if condicio else valor_no\`
 \`\`\`python
+# Java:   (edat >= 18) ? "major" : "menor"
+# Python:
 estat = "major" if edat >= 18 else "menor"
-\`\`\`
-
-Es llegeix com angles natural: *"major if age >= 18 else menor"*.`,javaComparison:`// Condicionals a Java
-if (nota >= 9) {
+\`\`\``,javaComparison:`if (nota >= 9) {
     System.out.println("Excel·lent");
-} else if (nota >= 7) {
-    System.out.println("Notable");
 } else if (nota >= 5) {
     System.out.println("Aprovat");
 } else {
-    System.out.println("Suspès");
+    System.out.println("Suspes");
 }
 
-// Ternari a Java
-String estat = (edat >= 18) ? "major" : "menor";`},{id:"theory-cond-02",topicId:"conditionals",order:2.5,title:"match-case (switch de Python)",content:`## match-case: el switch de Python
+String estat = (edat >= 18) ? "major" : "menor";`},{id:"theory-cond-02",topicId:"conditionals",order:2.5,title:"match-case",content:`## match-case (Python 3.10+)
 
-Des de **Python 3.10**, existeix \`match-case\`, equivalent al \`switch\` de Java:
+Equivalent al \`switch\` de Java, pero **sense break** i amb \`_\` com a default:
 
 \`\`\`python
 match operacio:
@@ -808,59 +671,17 @@ match operacio:
         resultat = a + b
     case "-":
         resultat = a - b
-    case "*":
-        resultat = a * b
     case "/":
-        if b != 0:
-            resultat = a / b
-        else:
-            resultat = "Error: divisio per zero"
-    case _:          # _ es el "default"
+        resultat = a / b if b != 0 else "Error"
+    case _:
         resultat = "Operacio no valida"
 \`\`\`
 
-### Diferencies amb el switch de Java
-
-| Concepte | Java | Python |
-|---|---|---|
-| Paraula clau | \`switch\` | \`match\` |
-| Casos | \`case X:\` | \`case X:\` |
-| Per defecte | \`default:\` | \`case _:\` |
-| Break | Necessari | No cal (no hi ha fall-through) |
-
-### Pattern matching avancat
-
-\`match-case\` de Python es molt mes potent que el \`switch\` de Java. Pot descompondre estructures:
-
-\`\`\`python
-match punt:
-    case (0, 0):
-        print("Origen")
-    case (x, 0):
-        print(f"Eix X a {x}")
-    case (0, y):
-        print(f"Eix Y a {y}")
-    case (x, y):
-        print(f"Punt ({x}, {y})")
-\`\`\``,javaComparison:`// Switch a Java (classic)
-switch (operacio) {
-    case "+":
-        resultat = a + b;
-        break;              // Necessari!
-    case "-":
-        resultat = a - b;
-        break;
-    default:
-        resultat = "Operacio no valida";
-        break;
-}
-
-// Switch expression (Java 14+)
-var resultat = switch (operacio) {
-    case "+" -> a + b;
-    case "-" -> a - b;
-    default -> "Operacio no valida";
-};`}],Fs=[{id:"variables",order:1,title:"Variables i Tipus",icon:"VAR",description:"Declaracio de variables, tipus de dades i diferencies amb Java",prerequisites:[],exercises:nj,theoryBlocks:sj},{id:"operators",order:2,title:"Operadors",icon:"OPS",description:"Operadors aritmetics, logics, de comparacio i especials de Python",prerequisites:["variables"],exercises:ij,theoryBlocks:aj},{id:"conditionals",order:3,title:"Condicionals",icon:"IF",description:"if, elif, else i diferencies amb el switch de Java",prerequisites:["operators"],exercises:rj,theoryBlocks:lj},{id:"loops",order:4,title:"Bucles",icon:"FOR",description:"for, while, range(), enumerate() i comprensio vs Java",prerequisites:["conditionals"],exercises:[],theoryBlocks:[]},{id:"functions",order:5,title:"Funcions",icon:"DEF",description:"Definicio, parametres, return, args/kwargs vs metodes Java",prerequisites:["loops"],exercises:[],theoryBlocks:[]},{id:"strings",order:6,title:"Strings",icon:"STR",description:"Manipulacio de cadenes, f-strings, slicing vs String de Java",prerequisites:["functions"],exercises:[],theoryBlocks:[]},{id:"lists",order:7,title:"Llistes",icon:"LST",description:"Llistes, slicing, metodes vs ArrayList de Java",prerequisites:["strings"],exercises:[],theoryBlocks:[]},{id:"tuples",order:8,title:"Tuples",icon:"TUP",description:"Tuples, immutabilitat, unpacking",prerequisites:["lists"],exercises:[],theoryBlocks:[]},{id:"dicts",order:9,title:"Diccionaris",icon:"DIC",description:"Diccionaris, metodes, iteracio vs HashMap de Java",prerequisites:["tuples"],exercises:[],theoryBlocks:[]},{id:"comprehensions",order:10,title:"Comprehensions",icon:"CMP",description:"List, dict i set comprehensions",prerequisites:["dicts"],exercises:[],theoryBlocks:[]},{id:"files",order:11,title:"Fitxers",icon:"I/O",description:"Lectura i escriptura de fitxers, context manager (with)",prerequisites:["comprehensions"],exercises:[],theoryBlocks:[]},{id:"algorithms",order:12,title:"Algorismia",icon:"ALG",description:"Sorting, searching, recursio, problemes tipus entrevista",prerequisites:["files"],exercises:[],theoryBlocks:[]}];function oj({currentTopicId:n,onSelectTopic:e,userRole:t,showDashboard:i,onDashboard:r,onHome:s}){return S.jsxs("aside",{className:"w-64 min-h-screen bg-sidebar text-white flex flex-col shrink-0",children:[S.jsx("div",{className:"p-4 border-b border-gray-700",children:S.jsxs("button",{onClick:s,className:"flex items-center gap-3 cursor-pointer group",children:[S.jsx("div",{className:"w-10 h-10 bg-primary rounded-lg flex items-center justify-center",children:S.jsx("svg",{className:"w-6 h-6 text-accent",viewBox:"0 0 24 24",fill:"currentColor",children:S.jsx("path",{d:"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"})})}),S.jsxs("div",{children:[S.jsx("h1",{className:"text-lg font-bold group-hover:text-accent transition",children:"Python DAM"}),S.jsx("p",{className:"text-xs text-gray-400",children:"La Salle Tarragona"})]})]})}),t==="teacher"&&r&&S.jsx("div",{className:"px-2 pt-3 pb-1",children:S.jsxs("button",{onClick:r,className:`
+Tambe pots usar \`if/elif\` normal, que funciona igual de be.`,javaComparison:`switch (operacio) {
+    case "+": resultat = a + b; break;
+    case "-": resultat = a - b; break;
+    default: resultat = "No valid"; break;
+}`}],Fs=[{id:"variables",order:1,title:"Variables i Tipus",icon:"VAR",description:"Declaracio de variables, tipus de dades i diferencies amb Java",prerequisites:[],exercises:nj,theoryBlocks:sj},{id:"operators",order:2,title:"Operadors",icon:"OPS",description:"Operadors aritmetics, logics, de comparacio i especials de Python",prerequisites:["variables"],exercises:ij,theoryBlocks:aj},{id:"conditionals",order:3,title:"Condicionals",icon:"IF",description:"if, elif, else i diferencies amb el switch de Java",prerequisites:["operators"],exercises:rj,theoryBlocks:lj},{id:"loops",order:4,title:"Bucles",icon:"FOR",description:"for, while, range(), enumerate() i comprensio vs Java",prerequisites:["conditionals"],exercises:[],theoryBlocks:[]},{id:"functions",order:5,title:"Funcions",icon:"DEF",description:"Definicio, parametres, return, args/kwargs vs metodes Java",prerequisites:["loops"],exercises:[],theoryBlocks:[]},{id:"strings",order:6,title:"Strings",icon:"STR",description:"Manipulacio de cadenes, f-strings, slicing vs String de Java",prerequisites:["functions"],exercises:[],theoryBlocks:[]},{id:"lists",order:7,title:"Llistes",icon:"LST",description:"Llistes, slicing, metodes vs ArrayList de Java",prerequisites:["strings"],exercises:[],theoryBlocks:[]},{id:"tuples",order:8,title:"Tuples",icon:"TUP",description:"Tuples, immutabilitat, unpacking",prerequisites:["lists"],exercises:[],theoryBlocks:[]},{id:"dicts",order:9,title:"Diccionaris",icon:"DIC",description:"Diccionaris, metodes, iteracio vs HashMap de Java",prerequisites:["tuples"],exercises:[],theoryBlocks:[]},{id:"comprehensions",order:10,title:"Comprehensions",icon:"CMP",description:"List, dict i set comprehensions",prerequisites:["dicts"],exercises:[],theoryBlocks:[]},{id:"files",order:11,title:"Fitxers",icon:"I/O",description:"Lectura i escriptura de fitxers, context manager (with)",prerequisites:["comprehensions"],exercises:[],theoryBlocks:[]},{id:"algorithms",order:12,title:"Algorismia",icon:"ALG",description:"Sorting, searching, recursio, problemes tipus entrevista",prerequisites:["files"],exercises:[],theoryBlocks:[]}];function oj({currentTopicId:n,onSelectTopic:e,userRole:t,showDashboard:i,onDashboard:r,onHome:s}){return S.jsxs("aside",{className:"w-64 min-h-screen bg-sidebar text-white flex flex-col shrink-0",children:[S.jsx("div",{className:"p-4 border-b border-gray-700",children:S.jsxs("button",{onClick:s,className:"flex items-center gap-3 cursor-pointer group",children:[S.jsx("div",{className:"w-10 h-10 bg-primary rounded-lg flex items-center justify-center",children:S.jsx("svg",{className:"w-6 h-6 text-accent",viewBox:"0 0 24 24",fill:"currentColor",children:S.jsx("path",{d:"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"})})}),S.jsxs("div",{children:[S.jsx("h1",{className:"text-lg font-bold group-hover:text-accent transition",children:"Python DAM"}),S.jsx("p",{className:"text-xs text-gray-400",children:"La Salle Tarragona"})]})]})}),t==="teacher"&&r&&S.jsx("div",{className:"px-2 pt-3 pb-1",children:S.jsxs("button",{onClick:r,className:`
               w-full text-left px-3 py-2 text-sm rounded-lg flex items-center gap-2
               transition-colors duration-150 cursor-pointer
               ${i?"bg-accent text-primary-dark font-medium":"text-accent hover:bg-sidebar-hover"}
