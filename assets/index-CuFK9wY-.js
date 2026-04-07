@@ -1022,7 +1022,60 @@ La indentacio es **obligatoria**. Si es incorrecta: \`IndentationError\`.
 
 ---
 
-## 10. if / elif / else
+## 10. Funcions (def, return, pass)
+
+Definicio amb \`def\`. Sense tipus al parametres ni al return:
+
+\`\`\`python
+def saludar(nom):
+    return f"Hola {nom}"
+
+print(saludar("Anna"))    # Hola Anna
+\`\`\`
+
+### return
+
+Una funcio retorna un valor amb \`return\`. Si no hi ha \`return\`, retorna \`None\`:
+
+\`\`\`python
+def doblar(n):
+    return n * 2
+
+def imprimir_doblat(n):
+    print(n * 2)
+    # sense return -> retorna None
+
+x = doblar(5)              # x = 10
+y = imprimir_doblat(5)     # imprimeix 10, y = None
+\`\`\`
+
+Pots retornar **multiples valors** d'una vegada (en realitat es una tupla):
+
+\`\`\`python
+def min_max(a, b):
+    if a < b:
+        return a, b
+    return b, a
+
+petit, gran = min_max(7, 3)    # petit=3, gran=7
+\`\`\`
+
+### pass
+
+A Python **no pots tenir un bloc buit**. Si vols deixar una funcio "per implementar", usa \`pass\`:
+
+\`\`\`python
+def funcio_pendent():
+    pass    # no fa res, pero el codi compila
+\`\`\`
+
+Sense \`pass\` donaria \`IndentationError\`. Es la manera de dir "aqui no faig res, pero ja ho omplire". Tambe funciona dins de \`if\`, \`for\`, classes, etc.
+
+**Important**: en els exercicis, el codi inicial sovint te \`pass\` com a placeholder. **Has de substituir-lo** per la teva solucio.
+
+---
+
+## 11. if / elif / else
 
 \`\`\`python
 if nota >= 9:
@@ -1054,7 +1107,7 @@ match operacio:
 
 ---
 
-## 11. Bucle for i range()
+## 12. Bucle for i range()
 
 \`for\` amb \`range()\` per repetir amb numeros:
 
@@ -1074,7 +1127,7 @@ for i in range(10, 0, -1): # 10, 9, 8 ... 1 (enrere)
 
 ---
 
-## 12. while
+## 13. while
 
 \`\`\`python
 x = 10
@@ -1085,7 +1138,7 @@ while x > 0:
 
 ---
 
-## 13. break i continue
+## 14. break i continue
 
 \`\`\`python
 for i in range(100):
