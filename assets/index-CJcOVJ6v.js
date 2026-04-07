@@ -1022,9 +1022,41 @@ La indentacio es **obligatoria**. Si es incorrecta: \`IndentationError\`.
 
 ---
 
-## 10. Funcions (def, return, pass)
+## 10. if / elif / else
 
-Definicio amb \`def\`. Sense tipus al parametres ni al return:
+\`\`\`python
+if nota >= 9:
+    print("Excel·lent")
+elif nota >= 7:
+    print("Notable")
+elif nota >= 5:
+    print("Aprovat")
+else:
+    print("Suspes")
+\`\`\`
+
+Recorda: \`elif\`, no \`else if\`.
+
+### Operador ternari
+
+\`\`\`python
+estat = "major" if edat >= 18 else "menor"
+\`\`\`
+
+### match-case (Python 3.10+)
+
+\`\`\`python
+match operacio:
+    case "+": resultat = a + b
+    case "-": resultat = a - b
+    case _:   resultat = "No valid"
+\`\`\`
+
+---
+
+## 11. Funcions (def, return, pass)
+
+Definicio amb \`def\`. Sense tipus als parametres ni al return:
 
 \`\`\`python
 def saludar(nom):
@@ -1071,38 +1103,18 @@ def funcio_pendent():
 
 Sense \`pass\` donaria \`IndentationError\`. Es la manera de dir "aqui no faig res, pero ja ho omplire". Tambe funciona dins de \`if\`, \`for\`, classes, etc.
 
-**Important**: en els exercicis, el codi inicial sovint te \`pass\` com a placeholder. **Has de substituir-lo** per la teva solucio.
+**Important**: en els exercicis, el codi inicial sovint te \`pass\` com a placeholder. **Has de substituir-lo** per la teva solucio. La funcio \`def es_primer(n): pass\` no fa res - has d'escriure el codi a dins.
 
----
+### Cridar una funcio
 
-## 11. if / elif / else
-
-\`\`\`python
-if nota >= 9:
-    print("Excel·lent")
-elif nota >= 7:
-    print("Notable")
-elif nota >= 5:
-    print("Aprovat")
-else:
-    print("Suspes")
-\`\`\`
-
-Recorda: \`elif\`, no \`else if\`.
-
-### Operador ternari
+Per usar una funcio, l'has de **cridar** posant parentesis amb els arguments:
 
 \`\`\`python
-estat = "major" if edat >= 18 else "menor"
-\`\`\`
+def quadrat(n):
+    return n * n
 
-### match-case (Python 3.10+)
-
-\`\`\`python
-match operacio:
-    case "+": resultat = a + b
-    case "-": resultat = a - b
-    case _:   resultat = "No valid"
+resultat = quadrat(5)     # resultat = 25
+print(quadrat(3))         # imprimeix 9
 \`\`\`
 
 ---
